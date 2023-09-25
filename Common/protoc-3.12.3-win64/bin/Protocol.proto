@@ -1,0 +1,113 @@
+syntax = "proto3";
+package Protocol;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Google.Protobuf.Protocol"; //C#파일의 네임스페이스 이름\\
+
+message Vec{
+	float X = 1;
+	float Y = 2;
+	float Z = 3	;
+}
+
+enum ObjectType{
+	Player = 0;
+	Bullet = 1;
+}
+
+message ObjectInfo{
+	int32 Id = 1;
+	ObjectType Type = 2;
+	bool isMine = 3;
+	Vec Position = 4;
+	Vec Rotate = 5;
+	Vec Scale = 6;
+}
+
+message UserInfo{
+	string nickName = 2;
+}
+
+
+enum MsgId{ 
+	C_MATCHING_REQ = 0;
+	S_MATCHING_RES = 1;
+	C_SPAWNPLAYER_REQ = 2;
+	S_SPAWN_RES = 3;
+	S_DESPAWN = 4;
+	C_MOVE_REQ = 5;
+	S_MOVE_RES = 6;
+	C_TRY_ATTACK = 7;
+	S_ATTACK_RES = 8;
+	C_ATTACK_REQ = 9;
+	S_SET_HP = 10;
+	S_SET_OUTCOME = 11;
+	C_LEAVE_ROOM = 12;
+	C_SET_USERINFO = 13;
+}
+
+
+message C_MatchingReq{
+	bool isCancel = 1;
+}
+
+message S_MatchingRes{
+	int32 mineIdx = 1;
+	repeated UserInfo Users = 2;
+}
+
+message C_SpawnplayerReq{
+	bool isTopPlayer = 1;
+}
+
+message S_SpawnRes {
+	repeated ObjectInfo Objects = 1;
+}
+
+message S_Despawn {
+	repeated int32 ObjectId = 1;
+}
+
+message C_MoveReq{
+	Vec inputDir = 1;
+}
+
+message S_MoveRes{
+	int32 Id = 1;
+	Vec Position = 2;
+}
+
+message C_TryAttack{
+
+}
+
+message S_AttackRes{
+	int32 objectId = 1;
+	bool CanAttack = 2;
+
+}
+
+message C_AttackReq{
+	Vec Position = 1;
+	Vec Rotation = 2;	
+	Vec Dir = 3;
+}
+
+
+
+message S_SetHp{
+	int32 Id = 1;
+	int32 Hp = 2;
+}
+
+message S_SetOutcome{
+	bool isWin = 1;
+}
+
+message C_LeaveRoom{
+}
+
+message C_SetUserinfo{
+	UserInfo info = 1;
+}
