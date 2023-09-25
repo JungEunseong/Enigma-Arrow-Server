@@ -9,16 +9,16 @@ class Program
     {
 
         // DNS (Domain Name System)
-        /*string host = Dns.GetHostName();
-        IPHostEntry ipHost = Dns.GetHostEntry(host);
-        IPAddress ipAddr = ipHost.AddressList[0];
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);*/
-
-        // DNS (Domain Name System)
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
+        IPAddress ipAddr = ipHost.AddressList[0];
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+        // DNS (Domain Name System)
+        /*string host = Dns.GetHostName();
+        IPHostEntry ipHost = Dns.GetHostEntry(host);
         IPAddress ipAddr = IPAddress.Parse(args[0]);
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, Int32.Parse(args[1]));
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, Int32.Parse(args[1]));*/
 
 
         Console.WriteLine(endPoint.Address.ToString());
